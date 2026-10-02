@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study 3 — Choose a Session</title>
+<style>
+:root{
+  --navy:#12344d; --gold:#c79a3b; --gold2:#e7c879; --bg:#f4f6f8;
+  --text:#23313d; --muted:#6a7680; --line:#dfe5ea; --soft:#fbfaf7;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text)}
+body{min-height:100vh}
+.header{height:62px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-weight:700;letter-spacing:.8px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border:2px solid var(--gold2);transform:rotate(45deg);border-radius:3px;position:relative}
+.mark:after{content:"";position:absolute;width:10px;height:10px;border:2px solid var(--gold2);left:7px;top:7px}
+.pid{font-size:11px;font-weight:500;opacity:.72}
+.wrap{width:min(820px,calc(100% - 32px));margin:34px auto 60px}
+.card{background:#fff;border:1px solid #e2e7eb;border-radius:18px;padding:38px 44px;box-shadow:0 14px 38px rgba(21,43,60,.09)}
+.kicker{font-size:13px;font-weight:800;color:var(--gold);letter-spacing:1.3px;text-transform:uppercase;margin-bottom:10px}
+h1{margin:0 0 16px;color:var(--navy);font-size:30px;line-height:1.25}
+p{font-size:18px;line-height:1.72;margin:12px 0}
+.scenario{background:var(--soft);border-left:4px solid var(--gold);padding:20px 22px;border-radius:10px;margin-top:20px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.option{display:block;border:2px solid #d8dde2;border-radius:14px;padding:26px 24px;text-decoration:none;color:var(--text);background:#fff;transition:.15s;text-align:center}
+.option:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 10px 24px rgba(100,73,18,.14)}
+.option .icon{font-size:34px;margin-bottom:10px}
+.option .name{font-weight:800;color:var(--navy);font-size:19px;margin-bottom:8px}
+.option .desc{font-size:14px;color:var(--muted);line-height:1.55}
+.option .go{display:inline-block;margin-top:16px;padding:10px 22px;border-radius:10px;background:linear-gradient(135deg,#b98528,#d7ae58);color:#fff;font-size:15px;font-weight:700}
+.note{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:640px){
+ .wrap{margin:22px auto}.card{padding:26px 20px}h1{font-size:25px}p{font-size:16px}
+ .options{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand"><span class="mark"></span><span>AURORA HOTELS</span></div>
+  <div class="pid" id="pid"></div>
+</div>
+
+<main class="wrap">
+  <section class="card">
+    <div class="kicker">Study 3</div>
+    <h1>Welcome</h1>
+    <div class="scenario"><p>Thank you for participating in this study. Please choose one of the two sessions below to begin.</p></div>
+
+    <div class="options">
+      <a class="option" id="linkMonetary" href="study3_provider_paid_monetary.html">
+        <div class="icon">🏷️</div>
+        <div class="name">Session 1</div>
+        <div class="desc">Provider-focused &middot; Paid membership &middot; Monetary failure</div>
+        <span class="go">Enter Session 1</span>
+      </a>
+
+      <a class="option" id="linkRecognition" href="study3_self_earned_recognition.html">
+        <div class="icon">🏅</div>
+        <div class="name">Session 2</div>
+        <div class="desc">Self-focused &middot; Earned membership &middot; Recognition failure</div>
+        <span class="go">Enter Session 2</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="note">Study 3 experimental scenario</div>
+</main>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const prolificPID = params.get('PROLIFIC_PID') || '';
+
+document.addEventListener('DOMContentLoaded', () => {
+  if(prolificPID){
+    document.getElementById('pid').textContent = 'Participant ID: ' + prolificPID;
+  }
+  // 将 URL 参数（PROLIFIC_PID / STUDY_ID / SESSION_ID 等）透传到两个实验页面
+  const query = params.toString();
+  if(query){
+    document.getElementById('linkMonetary').href = 'study3_provider_paid_monetary.html?' + query;
+    document.getElementById('linkRecognition').href = 'study3_self_earned_recognition.html?' + query;
+  }
+});
+</script>
+</body>
+</html>

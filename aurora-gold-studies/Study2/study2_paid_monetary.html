@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study 2 — Paid membership + Monetary failure</title>
+<style>
+:root{
+  --navy:#12344d; --gold:#c79a3b; --gold2:#e7c879; --bg:#f4f6f8;
+  --text:#23313d; --muted:#6a7680; --danger:#b84238; --dangerbg:#fff1ef;
+  --line:#dfe5ea; --soft:#fbfaf7; --ok:#2f6d4c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text)}
+body{min-height:100vh}
+.header{height:62px;background:var(--navy);color:#fff;display:flex;align-items:center;padding:0 26px;font-weight:700;letter-spacing:.8px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border:2px solid var(--gold2);transform:rotate(45deg);border-radius:3px;position:relative}
+.mark:after{content:"";position:absolute;width:10px;height:10px;border:2px solid var(--gold2);left:7px;top:7px}
+.wrap{width:min(800px,calc(100% - 32px));margin:38px auto 60px}
+.progress{height:7px;background:#e5e9ed;border-radius:99px;overflow:hidden;margin-bottom:18px}
+.progress>div{height:100%;background:linear-gradient(90deg,#b98528,#d7ae58);width:50%;transition:width .2s ease}
+.card{background:#fff;border:1px solid #e2e7eb;border-radius:18px;padding:38px 44px;box-shadow:0 14px 38px rgba(21,43,60,.09)}
+.stage{display:none}.stage.active{display:block}
+.kicker{font-size:13px;font-weight:800;color:var(--gold);letter-spacing:1.3px;text-transform:uppercase;margin-bottom:10px}
+h1{margin:0 0 16px;color:var(--navy);font-size:30px;line-height:1.25}
+h2{margin:0 0 14px;color:var(--navy);font-size:25px}
+p{font-size:18px;line-height:1.72;margin:12px 0}
+.scenario{background:var(--soft);border-left:4px solid var(--gold);padding:20px 22px;border-radius:10px;margin-top:20px}
+.goldcard{margin:24px auto;padding:24px 26px;border-radius:16px;background:linear-gradient(135deg,#f3d889,#c9962b 55%,#f6e0a5);max-width:570px;color:#2d230f;box-shadow:0 10px 24px rgba(100,73,18,.18)}
+.goldcard .title{text-align:center;font-weight:800;letter-spacing:1.5px;margin-bottom:14px}
+.goldgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;font-size:15px}
+.goldgrid b{display:block;font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:.7px}
+.portal{margin:24px 0 0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.portal-head{background:#f6f8fa;padding:16px 18px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;gap:18px}
+.portal-body{padding:22px}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;font-size:15px}
+.meta span{color:var(--muted)}
+.status{margin:18px 0;padding:13px 15px;background:var(--dangerbg);color:var(--danger);border:1px solid #f0c8c4;border-radius:10px;font-weight:800}
+.actions{margin-top:30px;text-align:center}
+button{appearance:none;border:0;border-radius:10px;padding:14px 28px;background:linear-gradient(135deg,#b98528,#d7ae58);color:#fff;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 7px 18px rgba(171,125,35,.22)}
+button:hover{transform:translateY(-1px)}
+button:disabled{opacity:.72;cursor:default;transform:none}
+.done{display:none;margin-top:18px;padding:14px 16px;background:#eef7f1;border-radius:10px;color:var(--ok);font-size:14px}
+.note{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:640px){
+ .wrap{margin:22px auto}.card{padding:26px 20px}h1{font-size:25px}h2{font-size:22px}p{font-size:16px}
+ .meta,.goldgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="header"><div class="brand"><span class="mark"></span><span>AURORA HOTELS</span></div></div>
+
+<main class="wrap">
+  <div class="progress"><div id="bar"></div></div>
+
+  <section class="card stage active">
+    <div class="kicker">Gold Membership Program</div>
+    <h1>Aurora Gold Membership</h1>
+
+    <div class="scenario"><p>Imagine that you are a customer of Aurora Hotels, which offers a Gold Membership Program. Please imagine yourself in the following situation and proceed through the membership task as you normally would.<br><br>
+At the beginning of this year, you paid the required annual membership fee to join the Aurora Gold Membership Program. Once the membership fee was paid, your Gold membership became active for one year.</p></div>
+
+    <div class="goldcard">
+      <div class="title">AURORA HOTELS · GOLD MEMBERSHIP</div>
+      <div class="goldgrid">
+        <div><b>Status</b>ACTIVE</div>
+        <div><b>Membership level</b>GOLD</div>
+        <div><b>Validity</b>1 YEAR</div>
+        <div><b>Member service</b>AVAILABLE</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" onclick="showStage(1)">Continue as a Gold Member</button>
+    </div>
+  </section>
+
+  <section class="card stage">
+    <div class="kicker">Gold Member Service Portal</div>
+    <h2>Gold Member Booking</h2>
+    <p>You are about to use one of the benefits associated with your Aurora Gold membership during an upcoming hotel stay. Please proceed through the member-service portal.</p>
+
+    <div class="portal">
+      <div class="portal-head"><span>Gold Member Booking</span><span>Gold Member</span></div>
+      <div class="portal-body">
+        <div class="meta">
+        <div><span>Room booking</span><br><b>Eligible room</b></div>
+        <div><span>Gold member benefit</span><br><b>15% member-only discount</b></div>
+        </div>
+        <div class="status">Gold Member Discount Not Applied</div>
+        <p>You booked an eligible room for an upcoming stay. When reviewing your bill, you noticed that the promised Gold-member discount had not been applied. You contacted the hotel, but the staff informed you that the discount could not be applied to this stay.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="finalBtn" type="button" onclick="finish()">Continue</button>
+      <div id="doneBox" class="done">
+        You have completed this webpage. Please return to the Credamo questionnaire.
+      </div>
+    </div>
+  </section>
+
+  <div class="note">Study 2 experimental scenario</div>
+</main>
+<script>
+function showStage(n){
+  const stages = document.querySelectorAll('.stage');
+  stages.forEach((s,i)=>s.classList.toggle('active', i===n));
+  document.getElementById('bar').style.width = n===0 ? '50%' : '100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function finish(){
+  const btn = document.getElementById('finalBtn');
+  const done = document.getElementById('doneBox');
+  btn.disabled = true;
+  btn.textContent = 'Completed ✓';
+  done.style.display = 'block';
+
+  const params = new URLSearchParams(window.location.search);
+  const returnUrl = params.get('return');
+  if(returnUrl){ setTimeout(()=>{ window.location.href = returnUrl; }, 650); }
+}
+</script>
+</body>
+</html>
